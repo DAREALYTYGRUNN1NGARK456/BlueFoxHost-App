@@ -20,7 +20,7 @@ let win;
 
 // Auto Updater
 require('update-electron-app')({
-    repo: 'BlueFox-Development/BlueFoxHost-App',
+    repo: 'FlaringPhoenix/BlueFoxHost-App',
     updateInterval: '1 hour',
     logger: require('electron-log')
 })
