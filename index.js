@@ -6,7 +6,7 @@ if (setupEvents.handleSquirrelEvent()) {
 }
 
 const electron = require('electron');
-const { app, BrowserWindow } = electron
+const { app, BrowserWindow, Menu, clipboard, dialog} = electron;
 const client = require('discord-rich-presence')("750914713977749556");
 
 // Load version from package.json
@@ -62,9 +62,76 @@ app.on('ready', async () => {
         },
     });
 
-    win.removeMenu();
-    loading.removeMenu();
+    // win.webContents.getURL();
+    var menu = Menu.buildFromTemplate([
+        {
+            label: 'Home',
+            click() { 
+                win.loadURL('https://bluefoxhost.com')
+            } 
+        },
+        {
+            label: 'Discord',
+            click() { 
+                win.loadURL('https://discord.bluefoxhost.com')
+            } 
+        },
+        {
+            label: 'Pages',
+            submenu: [
+                {
+                    label: 'Status',
+                    click() { 
+                        win.loadURL('https://status.bluefoxhost.com')
+                    } 
+                },
+                {
+                    label: 'Billing',
+                    click() { 
+                        win.loadURL('https://billing.bluefoxhost.com')
+                    } 
+                },
+                {
+                    label: 'Public Panel',
+                    click() { 
+                        win.loadURL('https://panel.bluefoxhost.com')
+                    } 
+                },
+                {
+                    label: 'Staff Panel',
+                    click() { 
+                        win.loadURL('https://staff.bluefoxhost.com')
+                    } 
+                },
+                {
+                    label: 'Haste',
+                    click() { 
+                        win.loadURL('https://haste.bluefoxhost.com')
+                    } 
+                },
+                {
+                    label: 'Mail',
+                    click() { 
+                        win.loadURL('https://mail.bluefoxhost.com')
+                    } 
+                }
+            ]
+        },
+        {
+            label: 'Tools',
+            submenu: [
+                {
+                    label: 'Copy Current URL',
+                    click() {
+                        clipboard.writeText(win.webContents.getURL())
+                    }
+                }
+            ]
+        }
+    ])
+    Menu.setApplicationMenu(menu); 
 
+    loading.removeMenu();
     loading.loadFile(load);
     win.loadURL(url);
 
@@ -103,7 +170,7 @@ app.on('ready', async () => {
         win.webContents.closeDevTools();
     });
 
-    win.once('ready-to-show',async () => {
+    win.once('ready-to-show', async() => {
         loading.destroy();
         win.show();
     });
