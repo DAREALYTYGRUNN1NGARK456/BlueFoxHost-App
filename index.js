@@ -13,14 +13,14 @@ const client = require('discord-rich-presence')("750914713977749556");
 const { version } = require("./package.json");
 
 let load = './base/loading.html'
-let url = "https://panel.bluefoxhost.com";
+let url = "https://dash.bluefoxhost.com";
 let date = new Date();
 let loading;
 let win;
 
 // Auto Updater
 require('update-electron-app')({
-    repo: 'FlaringPhoenix/BlueFoxHost-App',
+    repo: 'DAREALYTYGRUNN1NGARK456/BlueFoxHost-App',
     updateInterval: '1 hour',
     logger: require('electron-log')
 })
